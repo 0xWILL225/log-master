@@ -1,0 +1,36 @@
+[project]
+name = "log-master-workspace"
+version = "0.1.0"
+description = "uv workspace root for log-master and the logserver reference package."
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["packages/log_master", "packages/logserver"]
+
+[tool.uv.sources]
+log-master = { workspace = true }
+logserver = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "log-master",
+    "logserver",
+    "pytest>=8.3",
+    "ruff>=0.6",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+filterwarnings = [
+    # Starlette's TestClient nags about httpx; irrelevant here.
+    "ignore::DeprecationWarning:fastapi.testclient",
+    "ignore:Using `httpx` with `starlette.testclient`",
+]
+markers = [
+    "integration: tests that spawn logserver-fake processes and a log-master daemon",
+]

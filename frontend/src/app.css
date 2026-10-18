@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+@import '@skeletonlabs/skeleton';
+@import '@skeletonlabs/skeleton/optional/presets';
+@import '@skeletonlabs/skeleton/themes/cerberus';
+
+/* Everything is bundled; the UI must work without internet access (system fonts only). */
+
+@layer base {
+	/* High contrast for sunlight readability: pure white / near-black surfaces. */
+	[data-theme='cerberus'] {
+		--body-background-color: #ffffff;
+		--base-font-color: var(--color-surface-950);
+	}
+	button,
+	a,
+	input,
+	select,
+	textarea {
+		touch-action: manipulation;
+	}
+}
+
+@utility touch-target {
+	min-height: 44px;
+	min-width: 44px;
+}
+
+@utility mono {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}

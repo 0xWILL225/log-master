@@ -1,0 +1,19 @@
+[Unit]
+Description=log-master: coordinated recording across logging servers
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=@SERVICE_USER@
+Group=@SERVICE_USER@
+ExecStart=@PREFIX@/bin/log-master serve --config @CONFIG@
+Restart=always
+RestartSec=2
+# Creates /var/lib/log-master (the default state_file location) owned by the service user.
+StateDirectory=log-master
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

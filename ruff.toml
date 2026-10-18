@@ -1,0 +1,44 @@
+# ruff setup borrowed from pydantic and modified
+line-length = 120
+target-version = "py310"
+extend-exclude = ["pysbf2"]
+
+[lint]
+select = [
+    "F",
+    "E",
+    "I",
+    "D",
+    "UP",
+    "YTT",
+    "B",
+    "T10",
+    "T20",
+    "C4",
+    "PERF",
+    "PIE",
+    "PYI006",
+    "PYI062",
+    "PYI063",
+    "PYI066",
+]
+ignore = ["D105", "D107", "D205", "D415", "E501", "B011", "B028", "B904", "PIE804"]
+
+[lint.flake8-quotes]
+inline-quotes = "single"
+multiline-quotes = "double"
+
+[lint.isort]
+known-first-party = []
+
+[lint.mccabe]
+max-complexity = 14
+
+[lint.pydocstyle]
+convention = "google"
+
+[lint.per-file-ignores]
+"docs/*" = ["D"]
+
+[format]
+quote-style = "single"

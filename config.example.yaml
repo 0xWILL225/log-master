@@ -1,0 +1,32 @@
+# log-master configuration (/etc/log-master/config.yaml).
+# Edited by the web UI and CLI; comments are preserved.
+
+http:
+  bind: "0.0.0.0:8080"             # restart required after changes
+
+poll:
+  interval_s: 1.0
+  timeout_s: 0.8
+  offline_after_failures: 2
+
+listing:
+  timeout_s: 5.0
+
+recording:
+  start_lead_s: 2.0
+  stop_lead_s: 1.0
+  late_start_warn_ms: 500
+
+disk:
+  warn_free_bytes: 5368709120      # 5 GiB
+  warn_free_fraction: 0.10
+
+state_file: /var/lib/log-master/state.json
+
+sources:
+  - name: rover                    # unique, ^[a-z0-9][a-z0-9_-]{0,31}$; used in zip paths
+    url: http://robot-pc.local:8001
+    enabled_by_default: true
+  - name: base
+    url: http://base-pi.local:8002
+    enabled_by_default: true
